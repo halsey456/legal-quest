@@ -1,0 +1,156 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, 
+    #f8fafc 0%, 
+    #e2e8f0 30%, 
+    #cbd5e1 100%);
+}
+
+.header {
+  padding: 1.5rem 1rem 0.8rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+}
+
+.titleContainer {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0.5rem;
+}
+
+.mainTitle {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  margin-bottom: 0.3rem;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.redLine {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+}
+
+.description {
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  opacity: 0.9;
+  line-height: 1.4;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.cityMapContainer {
+  padding: 0.5rem 0.5rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+
+/* РАМКА С КАРТИНКОЙ - ОДИНАКОВАЯ НА ВСЕХ ЭКРАНАХ */
+.cityMapLarge {
+  position: relative;
+  width: 90%;
+  max-width: 1000px; /* Максимальная ширина */
+  aspect-ratio: 16/9; /* Соотношение сторон как у большинства карт */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 8px solid #2c5282;
+  background-image: url('/images/city-map.png');
+  background-size: contain; /* Картинка всегда полностью видна */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f0f8ff;
+  margin: 0 auto;
+}
+
+/* Медиазапросы */
+@media (max-width: 1200px) {
+  .cityMapLarge {
+    width: 92%;
+  }
+}
+
+@media (max-width: 992px) {
+  .cityMapLarge {
+    width: 94%;
+    border-width: 7px;
+  }
+  
+  .header {
+    min-height: 130px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cityMapLarge {
+    width: 96%;
+    border-width: 6px;
+    border-radius: 18px;
+  }
+  
+  .header {
+    min-height: 120px;
+    padding: 1rem 0.8rem 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .cityMapLarge {
+    width: 98%;
+    border-width: 5px;
+    border-radius: 15px;
+  }
+  
+  .header {
+    min-height: 110px;
+    padding: 0.8rem 0.5rem 0.4rem;
+  }
+  
+  .cityMapContainer {
+    min-height: 400px;
+    padding: 0.3rem 0.3rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cityMapLarge {
+    width: 99%;
+    border-width: 4px;
+    border-radius: 12px;
+  }
+  
+  .header {
+    min-height: 100px;
+  }
+}

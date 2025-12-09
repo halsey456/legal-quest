@@ -1,36 +1,69 @@
-import Link from 'next/link';
-import { Scale, ArrowRight } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import Building from './components/Building';
+import Modal from './components/Modal';
+import { blocksData } from './data/blocks';
+import styles from './page.module.css';
 
 export default function HomePage() {
+  const [selectedBlock, setSelectedBlock] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleBuildingClick = (block: any) => {
+    setSelectedBlock(block);
+    setIsModalOpen(true);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-blue-900 text-white">
-      <div className="container mx-auto px-4 py-12 md:py-16">
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-6">
-            <Scale className="w-16 h-16 md:w-20 md:h-20 text-blue-400" />
+    <>
+      <div className={styles.container}>
+        {/* Уменьшаем заголовок и его отступы */}
+        <header className={styles.header} style={{ minHeight: '180px' }}>
+          <div className={styles.titleContainer}>
+            <h1 className={styles.mainTitle} style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>
+              Интерактивный квест:<br />
+              <span className={styles.redLine}>"Преступления и Правонарушения"</span>
+            </h1>
+            <p className={styles.description} style={{ fontSize: '1rem', lineHeight: '1.4' }}>
+              Исследуйте юридический город. Кликайте на здания, чтобы изучать темы, проходить тесты 
+              и принимать решения в роли следователя.
+            </p>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Интерактивный квест по теме:</h1>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-red-400">"Преступления и Правонарушения"</h1>
-          <p className="text-lg md:text-xl text-blue-200 mb-8 max-w-2xl mx-auto px-4">
-            Интерактивный квест по правовой грамотности. Расследуйте дела, принимайте решения и изучайте законы в увлекательной форме!
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Link
-              href="/game"
-              className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold px-8 py-4 rounded-xl transition transform hover:scale-105"
+        </header>
+
+        <main className={styles.main}>
+          <div className={styles.cityMapContainer} style={{ paddingTop: '0.5rem' }}>
+            <div 
+              className={styles.cityMapLarge}
+              style={{
+                backgroundImage: "url('/images/city-map.png')",
+                backgroundSize: '95% auto',
+                backgroundPosition: 'center',
+                backgroundColor: '#f0f8ff',
+                marginTop: '30px', // ДОБАВЛЯЕМ ОТСТУП СВЕРХУ ДЛЯ РАМКИ
+                width: '85%', // Слегка увеличили ширину рамки
+                height: '620px' // Слегка уменьшили высоту рамки
+              }}
             >
-              Начать квест
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+              {/* Здания поверх картинки */}
+              {blocksData.map((block) => (
+                <Building
+                  key={block.id}
+                  block={block}
+                  onClick={handleBuildingClick}
+                />
+              ))}
+            </div>
           </div>
-          
-          <div className="mt-12 text-gray-300">
-            <p className="text-lg">Выполнил студент группы ПрИ-33</p>
-            <p className="text-xl font-semibold">Анищенко Иван</p>
-          </div>
-        </div>
+        </main>
       </div>
-    </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        block={selectedBlock}
+      />
+    </>
   );
 }

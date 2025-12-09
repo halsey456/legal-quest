@@ -1,0 +1,205 @@
+.building {
+  position: absolute;
+  width: 110px;
+  min-height: 110px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2);
+  z-index: 10;
+  transform-origin: bottom center;
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Более видимая рамка */
+  overflow: hidden;
+  /* ПОЛУПРОЗРАЧНЫЙ ФОН */
+  background-color: rgba(255, 255, 255, 0.15); /* 15% прозрачности белого фона */
+  backdrop-filter: blur(5px); /* Эффект размытия для стекла */
+}
+
+/* Градиентный слой поверх основного цвета */
+.building::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  border-radius: 10px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.building::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.8) 50%, 
+    transparent 100%);
+  z-index: 2;
+}
+
+.building:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 
+    0 15px 20px -5px rgba(0, 0, 0, 0.2),
+    0 8px 8px -5px rgba(0, 0, 0, 0.08),
+    0 0 15px var(--building-color, rgba(0, 0, 0, 0.1));
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.25); /* Более видимый при наведении */
+}
+
+.building.hovered {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 
+      0 15px 20px -5px rgba(0, 0, 0, 0.2),
+      0 8px 8px -5px rgba(0, 0, 0, 0.08),
+      0 0 15px var(--building-color, rgba(0, 0, 0, 0.1));
+  }
+  50% {
+    box-shadow: 
+      0 15px 20px -5px rgba(0, 0, 0, 0.25),
+      0 8px 8px -5px rgba(0, 0, 0, 0.1),
+      0 0 20px var(--building-color, rgba(0, 0, 0, 0.15));
+  }
+}
+
+.buildingContent {
+  padding: 0.8rem 0.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1; /* Поверх градиента */
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.building:hover .icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.buildingInfo {
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.blockNumber {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Усилили тень для читаемости */
+  line-height: 1.2;
+  margin-bottom: 0.2rem;
+  word-wrap: break-word;
+}
+
+.blockTitle {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95); /* Более яркий текст */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Усилили тень */
+  line-height: 1.1;
+  word-wrap: break-word;
+}
+
+/* Тултип */
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-dark);
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+  backdrop-filter: blur(10px);
+  background-color: rgba(10, 31, 58, 0.9); /* Полупрозрачный фон */
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(10, 31, 58, 0.9);
+}
+
+.tooltip p {
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .building {
+    width: 80px;
+    min-height: 80px;
+    backdrop-filter: blur(3px);
+  }
+  
+  .icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .blockNumber {
+    font-size: 0.8rem;
+  }
+  
+  .blockTitle {
+    font-size: 0.6rem;
+  }
+  
+  .tooltip {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.8rem;
+    white-space: normal;
+    max-width: 120px;
+    text-align: center;
+  }
+}

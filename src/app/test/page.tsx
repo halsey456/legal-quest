@@ -1,13 +1,14 @@
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import TestCard from '../components/TestCard';
 import { questionsData } from '../data/questions';
 import { blocksData } from '../data/blocks';
 import styles from './test.module.css';
 
-export default function TestPage() {
+// Обертка страницы в Suspense
+function TestPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const blockId = parseInt(searchParams.get('block') || '1');
@@ -188,5 +189,27 @@ export default function TestPage() {
         />
       )}
     </div>
+  );
+}
+
+// Основной компонент страницы с Suspense
+export default function TestPage() {
+  return (
+    <Suspense fallback={
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <div className={styles.headerTop}>
+            <button className={styles.backButton}>
+              ← Назад к карту
+            </button>
+          </div>
+          <div className={styles.headerContent}>
+            <h2 className={styles.blockTitle}>Загрузка теста...</h2>
+          </div>
+        </div>
+      </div>
+    }>
+      <TestPageContent />
+    </Suspense>
   );
 }

@@ -11,14 +11,12 @@
     inset 0 2px 0 rgba(255, 255, 255, 0.2);
   z-index: 10;
   transform-origin: bottom center;
-  border: 2px solid rgba(255, 255, 255, 0.5); /* Более видимая рамка */
+  border: 2px solid rgba(255, 255, 255, 0.5);
   overflow: hidden;
-  /* ПОЛУПРОЗРАЧНЫЙ ФОН */
-  background-color: rgba(255, 255, 255, 0.15); /* 15% прозрачности белого фона */
-  backdrop-filter: blur(5px); /* Эффект размытия для стекла */
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
 }
 
-/* Градиентный слой поверх основного цвета */
 .building::after {
   content: '';
   position: absolute;
@@ -58,7 +56,7 @@
     0 8px 8px -5px rgba(0, 0, 0, 0.08),
     0 0 15px var(--building-color, rgba(0, 0, 0, 0.1));
   z-index: 100;
-  background-color: rgba(255, 255, 255, 0.25); /* Более видимый при наведении */
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 .building.hovered {
@@ -88,7 +86,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: 1; /* Поверх градиента */
+  z-index: 1;
 }
 
 .icon {
@@ -113,7 +111,7 @@
   font-size: 0.9rem;
   font-weight: 800;
   color: white;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Усилили тень для читаемости */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   line-height: 1.2;
   margin-bottom: 0.2rem;
   word-wrap: break-word;
@@ -123,8 +121,8 @@
   display: block;
   font-size: 0.7rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.95); /* Более яркий текст */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Усилили тень */
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   line-height: 1.1;
   word-wrap: break-word;
 }
@@ -146,7 +144,7 @@
   z-index: 1000;
   animation: fadeIn 0.3s ease;
   backdrop-filter: blur(10px);
-  background-color: rgba(10, 31, 58, 0.9); /* Полупрозрачный фон */
+  background-color: rgba(10, 31, 58, 0.9);
 }
 
 .tooltip::before {
@@ -174,32 +172,80 @@
   }
 }
 
-/* Адаптивность */
+/* МОБИЛЬНЫЕ УСТРОЙСТВА - УМЕНЬШАЕМ БЛОКИ */
 @media (max-width: 768px) {
   .building {
-    width: 80px;
-    min-height: 80px;
-    backdrop-filter: blur(3px);
+    width: 70px !important; /* Уменьшаем ширину */
+    min-height: 70px !important; /* Уменьшаем высоту */
+    border-width: 1.5px !important;
+    backdrop-filter: blur(3px) !important;
   }
   
   .icon {
-    font-size: 1.6rem;
-    margin-bottom: 0.2rem;
+    font-size: 1.4rem !important; /* Уменьшаем иконку */
+    margin-bottom: 0.15rem !important;
   }
   
   .blockNumber {
-    font-size: 0.8rem;
+    font-size: 0.7rem !important; /* Уменьшаем номер блока */
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    margin-bottom: 0.1rem !important;
   }
   
   .blockTitle {
-    font-size: 0.6rem;
+    font-size: 0.55rem !important; /* Уменьшаем название */
+    line-height: 1 !important;
+    font-weight: 500 !important;
+  }
+  
+  .buildingContent {
+    padding: 0.5rem 0.3rem !important; /* Уменьшаем отступы внутри */
   }
   
   .tooltip {
-    font-size: 0.75rem;
-    padding: 0.5rem 0.8rem;
-    white-space: normal;
-    max-width: 120px;
-    text-align: center;
+    font-size: 0.7rem !important;
+    padding: 0.4rem 0.6rem !important;
+    white-space: normal !important;
+    max-width: 100px !important;
+    text-align: center !important;
+  }
+}
+
+/* ОЧЕНЬ МАЛЕНЬКИЕ ТЕЛЕФОНЫ */
+@media (max-width: 480px) {
+  .building {
+    width: 60px !important; /* Еще меньше */
+    min-height: 60px !important;
+  }
+  
+  .icon {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.1rem !important;
+  }
+  
+  .blockNumber {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.05rem !important;
+  }
+  
+  .blockTitle {
+    font-size: 0.5rem !important;
+  }
+  
+  .buildingContent {
+    padding: 0.4rem 0.2rem !important;
+  }
+}
+
+/* ГОРИЗОНТАЛЬНАЯ ОРИЕНТАЦИЯ НА ТЕЛЕФОНАХ */
+@media (max-width: 768px) and (orientation: landscape) {
+  .building {
+    width: 65px !important;
+    min-height: 65px !important;
+  }
+  
+  .blockTitle {
+    font-size: 0.5rem !important;
   }
 }

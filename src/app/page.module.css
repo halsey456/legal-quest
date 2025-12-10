@@ -40,7 +40,7 @@
 }
 
 .mainTitle {
-  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-size: clamp(1.8rem, 5vw, 2.5rem); /* УВЕЛИЧИЛИ БАЗОВЫЙ РАЗМЕР */
   margin-bottom: 0.3rem;
   line-height: 1.1;
   font-weight: 600;
@@ -53,11 +53,11 @@
   background-clip: text;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   font-weight: 700;
-  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  font-size: clamp(1.6rem, 4.5vw, 2.2rem); /* УВЕЛИЧИЛИ ЗАГОЛОВОК */
 }
 
 .description {
-  font-size: clamp(0.75rem, 2vw, 1rem);
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem); /* УВЕЛИЧИЛИ ОПИСАНИЕ */
   opacity: 0.9;
   line-height: 1.4;
   max-width: 700px;
@@ -76,81 +76,179 @@
   min-height: 500px;
 }
 
-/* РАМКА С КАРТИНКОЙ - ОДИНАКОВАЯ НА ВСЕХ ЭКРАНАХ */
+/* РАМКА С КАРТИНКОЙ */
 .cityMapLarge {
   position: relative;
   width: 90%;
-  max-width: 1000px; /* Максимальная ширина */
-  aspect-ratio: 16/9; /* Соотношение сторон как у большинства карт */
+  max-width: 1000px;
+  aspect-ratio: 16/9;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   border: 8px solid #2c5282;
   background-image: url('/images/city-map.png');
-  background-size: contain; /* Картинка всегда полностью видна */
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   background-color: #f0f8ff;
   margin: 0 auto;
 }
 
-/* Медиазапросы */
-@media (max-width: 1200px) {
-  .cityMapLarge {
-    width: 92%;
-  }
-}
-
-@media (max-width: 992px) {
-  .cityMapLarge {
-    width: 94%;
-    border-width: 7px;
+/* МОБИЛЬНЫЕ УСТРОЙСТВА - УВЕЛИЧИВАЕМ ЗАГОЛОВКИ */
+@media (max-width: 1024px) {
+  .header {
+    padding: 1.3rem 1rem 0.7rem;
+    min-height: 130px;
   }
   
-  .header {
-    min-height: 130px;
+  .mainTitle {
+    font-size: 1.7rem;
+  }
+  
+  .redLine {
+    font-size: 1.5rem;
+  }
+  
+  .description {
+    font-size: 0.95rem;
   }
 }
 
 @media (max-width: 768px) {
-  .cityMapLarge {
-    width: 96%;
-    border-width: 6px;
-    border-radius: 18px;
-  }
-  
   .header {
+    padding: 1.1rem 0.8rem 0.6rem;
     min-height: 120px;
-    padding: 1rem 0.8rem 0.5rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .cityMapLarge {
-    width: 98%;
-    border-width: 5px;
-    border-radius: 15px;
   }
   
-  .header {
-    min-height: 110px;
-    padding: 0.8rem 0.5rem 0.4rem;
+  .mainTitle {
+    font-size: 1.5rem; /* УВЕЛИЧИЛИ */
+    margin-bottom: 0.25rem;
+  }
+  
+  .redLine {
+    font-size: 1.3rem; /* УВЕЛИЧИЛИ */
+  }
+  
+  .description {
+    font-size: 0.85rem;
+    line-height: 1.3;
+    padding: 0 0.5rem;
   }
   
   .cityMapContainer {
-    min-height: 400px;
     padding: 0.3rem 0.3rem 1.5rem;
+    min-height: 450px;
+  }
+  
+  .cityMapLarge {
+    width: 96%;
+    border-width: 5px;
+    border-radius: 15px;
+    aspect-ratio: 4/3;
   }
 }
 
 @media (max-width: 480px) {
-  .cityMapLarge {
-    width: 99%;
-    border-width: 4px;
-    border-radius: 12px;
+  .header {
+    padding: 0.9rem 0.5rem 0.4rem;
+    min-height: 110px;
   }
   
+  .mainTitle {
+    font-size: 1.3rem; /* УВЕЛИЧИЛИ */
+    margin-bottom: 0.2rem;
+  }
+  
+  .redLine {
+    font-size: 1.1rem; /* УВЕЛИЧИЛИ */
+  }
+  
+  .description {
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+  
+  .cityMapContainer {
+    padding: 0.2rem 0.2rem 1rem;
+    min-height: 400px;
+  }
+  
+  .cityMapLarge {
+    width: 98%;
+    border-width: 4px;
+    border-radius: 12px;
+    aspect-ratio: 1;
+    max-height: 400px;
+  }
+}
+
+/* ГОРИЗОНТАЛЬНАЯ ОРИЕНТАЦИЯ */
+@media (max-width: 768px) and (orientation: landscape) {
   .header {
     min-height: 100px;
+    padding: 0.8rem 0.5rem 0.3rem;
+  }
+  
+  .mainTitle {
+    font-size: 1.2rem;
+  }
+  
+  .redLine {
+    font-size: 1rem;
+  }
+  
+  .description {
+    font-size: 0.7rem;
+  }
+  
+  .cityMapLarge {
+    aspect-ratio: 16/9;
+    height: 70vh;
+    max-height: none;
+  }
+}
+
+/* ОЧЕНЬ МАЛЕНЬКИЕ ТЕЛЕФОНЫ */
+@media (max-width: 360px) {
+  .header {
+    min-height: 100px;
+    padding: 0.7rem 0.4rem 0.3rem;
+  }
+  
+  .mainTitle {
+    font-size: 1.1rem; /* УВЕЛИЧИЛИ ДАЖЕ НА САМЫХ МАЛЕНЬКИХ */
+  }
+  
+  .redLine {
+    font-size: 0.95rem; /* УВЕЛИЧИЛИ */
+  }
+  
+  .description {
+    font-size: 0.65rem;
+  }
+  
+  .cityMapLarge {
+    max-height: 350px;
+  }
+}
+
+/* ДОПОЛНИТЕЛЬНО: если нужен еще больше заголовок на мобильных */
+@media (max-width: 768px) {
+  .mainTitle {
+    font-size: 1.6rem !important; /* ЕЩЕ БОЛЬШЕ */
+  }
+  
+  .redLine {
+    font-size: 1.4rem !important; /* ЕЩЕ БОЛЬШЕ */
+  }
+}
+
+@media (max-width: 481px) {
+  .mainTitle {
+    font-size: 1.4rem !important; /* МАКСИМАЛЬНО БОЛЬШОЙ */
+  }
+  
+  .redLine {
+    font-size: 1.2rem !important; /* МАКСИМАЛЬНО БОЛЬШОЙ */
   }
 }

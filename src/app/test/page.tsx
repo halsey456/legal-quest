@@ -1,3 +1,6 @@
+// app/test/page.tsx
+// Страница тестирования с вопросами и результатами
+
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -7,30 +10,33 @@ import { questionsData } from '../data/questions';
 import { blocksData } from '../data/blocks';
 import styles from './test.module.css';
 
-// Обертка страницы в Suspense
+// КОМПОНЕНТ С ОСНОВНЫМ КОНТЕНТОМ СТРАНИЦЫ
 function TestPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const blockId = parseInt(searchParams.get('block') || '1');
   
+  // СОСТОЯНИЯ ДЛЯ ТЕСТИРОВАНИЯ
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [userAnswers, setUserAnswers] = useState<{questionId: number, answerIndex: number, isCorrect: boolean}[]>([]);
   const [currentAnswer, setCurrentAnswer] = useState<{answerIndex: number, isCorrect: boolean} | null>(null);
 
-  // Фильтруем вопросы по блоку
+  // ФИЛЬТРАЦИЯ ВОПРОСОВ ПО БЛОКУ
   const blockQuestions = questionsData.filter(q => q.blockId === blockId);
   const blockInfo = blocksData.find(b => b.id === blockId);
 
+  // ОБРАБОТКА ВЫБОРА ОТВЕТА
   const handleAnswer = (answerIndex: number, isCorrect: boolean) => {
     setCurrentAnswer({ answerIndex, isCorrect });
   };
 
+  // ПЕРЕХОД К СЛЕДУЮЩЕМУ ВОПРОСУ
   const handleNextQuestion = () => {
     if (!currentAnswer) return;
     
-    // Сохраняем текущий ответ
+    // СОХРАНЕНИЕ ОТВЕТА ПОЛЬЗОВАТЕЛЯ
     const newUserAnswers = [...userAnswers, {
       questionId: blockQuestions[currentQuestion].id,
       answerIndex: currentAnswer.answerIndex,
@@ -42,10 +48,10 @@ function TestPageContent() {
       setScore(score + 1);
     }
     
-    // Сбрасываем текущий ответ
+    // СБРОС ТЕКУЩЕГО ОТВЕТА
     setCurrentAnswer(null);
     
-    // Переходим к следующему вопросу или показываем результаты
+    // ПРОВЕРКА ЗАВЕРШЕНИЯ ТЕСТА
     if (currentQuestion < blockQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
@@ -53,8 +59,8 @@ function TestPageContent() {
     }
   };
 
+  // ПОВТОР ТЕСТА
   const handleRetryTest = () => {
-    // Сбрасываем все данные теста
     setCurrentQuestion(0);
     setScore(0);
     setShowResults(false);
@@ -62,6 +68,7 @@ function TestPageContent() {
     setCurrentAnswer(null);
   };
 
+  // ОПРЕДЕЛЕНИЕ ОЦЕНКИ
   const calculateGrade = (percentage: number) => {
     if (percentage >= 90) return { grade: 'Отлично', emoji: '🎖️', color: '#10b981' };
     if (percentage >= 70) return { grade: 'Хорошо', emoji: '👍', color: '#3b82f6' };
@@ -69,26 +76,30 @@ function TestPageContent() {
     return { grade: 'Нужно повторить', emoji: '📚', color: '#ef4444' };
   };
 
+  // ОБРАБОТКА ОТСУТСТВИЯ ВОПРОСОВ
   if (!blockQuestions.length) {
     return (
       <div className={styles.errorContainer}>
         <h2>Вопросы для этого блока пока не готовы</h2>
-        <button onClick={() => router.push('/')} className={styles.backButton}>
+        <button onClick={() => router.push('/city-map')} className={styles.backButton}>
           ← Вернуться на карту
         </button>
       </div>
     );
   }
 
+  // РЕНДЕРИНГ СТРАНИЦЫ
   return (
     <div className={styles.container}>
+      {/* ЗАГОЛОВОЧНАЯ СЕКЦИЯ */}
       <div className={styles.header}>
         <div className={styles.headerTop}>
-          <button onClick={() => router.push('/')} className={styles.backButton}>
-            ← Назад к карту
+          <button onClick={() => router.push('/city-map')} className={styles.backButton}>
+            ← Назад к карте
           </button>
         </div>
         
+        {/* ПРОГРЕСС БАР */}
         <div className={styles.headerContent}>
           <h2 className={styles.blockTitle}>БЛОК #{blockId}: {blockInfo?.title}</h2>
           <div className={styles.progress}>
@@ -105,13 +116,16 @@ function TestPageContent() {
         </div>
       </div>
 
+      {/* РЕЗУЛЬТАТЫ ИЛИ ВОПРОС */}
       {showResults ? (
         <div className={styles.resultsContainer}>
+          {/* ЗАГОЛОВОК РЕЗУЛЬТАТОВ */}
           <div className={styles.resultsHeader}>
             <h2>Результаты теста</h2>
             <p className={styles.resultsSubtitle}>Блок #{blockId}: {blockInfo?.title}</p>
           </div>
           
+          {/* СЕКЦИЯ С РЕЗУЛЬТАТАМИ */}
           <div className={styles.scoreSection}>
             <div className={styles.scoreCard}>
               <div className={styles.scoreCircle}>
@@ -125,6 +139,7 @@ function TestPageContent() {
                   </div>
                 </div>
               </div>
+              {/* ОЦЕНКА */}
               {(() => {
                 const grade = calculateGrade((score / blockQuestions.length) * 100);
                 return (
@@ -136,6 +151,7 @@ function TestPageContent() {
             </div>
           </div>
           
+          {/* РАЗБОР ВОПРОСОВ */}
           <div className={styles.explanationsSection}>
             <h3>Разбор вопросов:</h3>
             <div className={styles.questionsReview}>
@@ -169,16 +185,18 @@ function TestPageContent() {
             </div>
           </div>
           
+          {/* КНОПКИ ДЕЙСТВИЙ */}
           <div className={styles.actions}>
             <button onClick={handleRetryTest} className={styles.retryButton}>
               🔄 Повторить тест
             </button>
-            <button onClick={() => router.push('/')} className={styles.homeButton}>
+            <button onClick={() => router.push('/city-map')} className={styles.homeButton}>
               ← Вернуться на карту города
             </button>
           </div>
         </div>
       ) : (
+        /* КОМПОНЕНТ ВОПРОСА */
         <TestCard
           question={blockQuestions[currentQuestion]}
           onAnswer={handleAnswer}
@@ -192,7 +210,7 @@ function TestPageContent() {
   );
 }
 
-// Основной компонент страницы с Suspense
+// ОСНОВНОЙ КОМПОНЕНТ С SUSPENSE
 export default function TestPage() {
   return (
     <Suspense fallback={
@@ -200,7 +218,7 @@ export default function TestPage() {
         <div className={styles.header}>
           <div className={styles.headerTop}>
             <button className={styles.backButton}>
-              ← Назад к карту
+              ← Назад к карте
             </button>
           </div>
           <div className={styles.headerContent}>

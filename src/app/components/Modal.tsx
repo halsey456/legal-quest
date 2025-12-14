@@ -1,3 +1,6 @@
+// app/components/Modal.tsx
+// Модальное окно с информацией о блоке и переходом к тесту
+
 'use client';
 
 import { useEffect } from 'react';
@@ -10,6 +13,7 @@ interface ModalProps {
 }
 
 export default function Modal({ isOpen, onClose, block }: ModalProps) {
+  // Обработка клавиши Escape и блокировка скролла
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -31,10 +35,12 @@ export default function Modal({ isOpen, onClose, block }: ModalProps) {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        {/* Кнопка закрытия */}
         <button className={styles.closeButton} onClick={onClose} aria-label="Закрыть">
           ×
         </button>
         
+        {/* Шапка с информацией о блоке */}
         <div className={styles.modalHeader}>
           <div className={styles.blockIcon} style={{ backgroundColor: block.color }}>
             {block.icon}
@@ -45,6 +51,7 @@ export default function Modal({ isOpen, onClose, block }: ModalProps) {
           </div>
         </div>
         
+        {/* Список тем для изучения */}
         <div className={styles.modalContent}>
           <div className={styles.learningObjectives}>
             <h4>Темы для изучения:</h4>
@@ -103,6 +110,7 @@ export default function Modal({ isOpen, onClose, block }: ModalProps) {
           </div>
         </div>
         
+        {/* Футер с кнопками действий */}
         <div className={styles.modalFooter}>
           <button onClick={onClose} className={styles.secondaryButton}>
             Изучить позже

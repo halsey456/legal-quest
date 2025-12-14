@@ -1,6 +1,10 @@
-/* Глобальные стили */
+/* app/globals.css */
+/* Глобальные стили и переменные для всего приложения */
+
+/* ИМПОРТ ШРИФТОВ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
+/* CSS ПЕРЕМЕННЫЕ */
 :root {
   --primary-dark: #0a1f3a;
   --primary-blue: #1a365d;
@@ -17,47 +21,55 @@
   --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
 }
 
+/* СБРОС СТИЛЕЙ */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* HTML ЭЛЕМЕНТ */
 html {
   scroll-behavior: smooth;
 }
 
+/* ТЕЛО СТРАНИЦЫ */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   line-height: 1.6;
   color: var(--text-dark);
-  background-color: var(--light-bg);
+  background-color: #ffffff;
   overflow-x: hidden;
 }
 
+/* ЗАГОЛОВКИ */
 h1, h2, h3, h4 {
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 600;
   line-height: 1.2;
 }
 
+/* ССЫЛКИ */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* КНОПКИ */
 button, .button {
   cursor: pointer;
   font-family: inherit;
   transition: all 0.3s ease;
 }
 
+/* УТИЛИТНЫЙ КОНТЕЙНЕР */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
 @media (max-width: 768px) {
   .container {
     padding: 0 15px;

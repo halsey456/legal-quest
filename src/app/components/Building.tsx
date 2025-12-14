@@ -1,3 +1,6 @@
+// app/components/Building.tsx
+// Компонент здания на карте города, представляет один блок обучения
+
 'use client';
 
 import { useState } from 'react';
@@ -24,14 +27,14 @@ export default function Building({ block, onClick }: BuildingProps) {
       style={{
         top: block.position.top,
         left: block.position.left,
-        // Устанавливаем основной цвет как градиент с прозрачностью
         backgroundColor: `rgba(${hexToRgb(block.color)}, 0.3)`,
-        '--building-color': block.color, // Для теней и других эффектов
+        '--building-color': block.color,
       } as React.CSSProperties}
       onClick={() => onClick(block)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Контент здания */}
       <div className={styles.buildingContent}>
         <div className={styles.icon}>{block.icon}</div>
         <div className={styles.buildingInfo}>
@@ -40,6 +43,7 @@ export default function Building({ block, onClick }: BuildingProps) {
         </div>
       </div>
       
+      {/* Всплывающая подсказка при наведении */}
       {isHovered && (
         <div className={styles.tooltip}>
           <p>{block.title}</p>
@@ -49,17 +53,14 @@ export default function Building({ block, onClick }: BuildingProps) {
   );
 }
 
-// Функция для преобразования HEX в RGB
+// Вспомогательная функция для преобразования HEX в RGB
 function hexToRgb(hex: string): string {
-  // Убираем # если есть
   hex = hex.replace('#', '');
   
-  // Преобразуем короткую запись в полную
   if (hex.length === 3) {
     hex = hex.split('').map(char => char + char).join('');
   }
   
-  // Получаем значения RGB
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);

@@ -1,0 +1,255 @@
+/* app/components/Navigation.module.css */
+/* Стили для навигационного меню */
+
+.nav {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+  color: white;
+  padding: 1rem 0;
+  box-shadow: var(--shadow-lg);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+/* Основной контейнер */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Логотип */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-right: 2rem;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.logo a:hover {
+  color: var(--accent-gold);
+}
+
+/* Навигационное меню */
+.menu {
+  display: flex;
+  list-style: none;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+}
+
+/* Ссылки навигации */
+.link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
+}
+
+.link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Активная ссылка */
+.link.active {
+  color: white;
+  background: rgba(212, 175, 55, 0.25);
+  border: 1px solid var(--accent-gold);
+  font-weight: 600;
+}
+
+.link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background: var(--accent-gold);
+  border-radius: 2px;
+}
+
+/* Мобильное меню (скрыто по умолчанию) */
+.mobileMenu {
+  display: none;
+}
+
+/* Выпадающее меню */
+.dropdown {
+  position: relative;
+}
+
+.dropdownToggle {
+  list-style: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdownToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdownToggle::-webkit-details-marker {
+  display: none;
+}
+
+/* Контент выпадающего меню */
+.dropdownContent {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: var(--shadow-lg);
+  min-width: 200px;
+  padding: 1rem 0;
+  z-index: 1000;
+  margin-top: 0.5rem;
+}
+
+/* Ссылки в мобильном меню */
+.mobileLink {
+  display: block;
+  padding: 0.8rem 1.5rem;
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.mobileLink:hover {
+  background: var(--light-bg);
+  color: var(--primary-blue);
+}
+
+.mobileLink.active {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--primary-blue);
+  font-weight: 600;
+  border-left: 4px solid var(--accent-gold);
+}
+
+/* Адаптивные стили для планшетов */
+@media (max-width: 992px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+  
+  .menu {
+    gap: 0.8rem;
+  }
+  
+  .link {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.9rem;
+  }
+  
+  .logo {
+    font-size: 1.3rem;
+    margin-right: 1.5rem;
+  }
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+  
+  .mobileMenu {
+    display: block;
+  }
+  
+  .container {
+    padding: 0 1rem;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    font-size: 1.2rem;
+    margin-right: 0;
+  }
+  
+  .dropdownToggle {
+    font-size: 1.5rem;
+    padding: 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.1rem;
+  }
+  
+  .logo a span:first-child {
+    display: none;
+  }
+  
+  .logo a span:last-child {
+    margin-left: 0;
+  }
+  
+  .dropdownToggle {
+    font-size: 1.4rem;
+    padding: 0.3rem;
+  }
+  
+  .nav {
+    padding: 0.8rem 0;
+    min-height: 55px;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo {
+    font-size: 1rem;
+  }
+  
+  .logo a span:first-child {
+    display: inline;
+  }
+}

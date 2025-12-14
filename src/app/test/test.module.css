@@ -1,3 +1,7 @@
+/* app/test/test.module.css */
+/* Стили для страницы тестирования и результатов */
+
+/* ОСНОВНОЙ КОНТЕЙНЕР */
 .container {
   min-height: 100vh;
   background: linear-gradient(135deg, 
@@ -7,6 +11,7 @@
   padding: 1rem;
 }
 
+/* КОНТЕЙНЕР ОШИБКИ */
 .errorContainer {
   max-width: 500px;
   margin: 5rem auto;
@@ -22,6 +27,7 @@
   margin-bottom: 2rem;
 }
 
+/* ЗАГОЛОВОЧНАЯ СЕКЦИЯ */
 .header {
   max-width: 800px;
   margin: 0 auto 2rem;
@@ -38,6 +44,7 @@
   margin-bottom: 1.5rem;
 }
 
+/* КНОПКА НАЗАД */
 .backButton {
   padding: 0.7rem 1.2rem;
   background: var(--light-bg);
@@ -69,6 +76,7 @@
   letter-spacing: 0.5px;
 }
 
+/* ПРОГРЕСС БАР */
 .progress {
   max-width: 500px;
   margin: 0 auto;
@@ -97,6 +105,7 @@
   transition: width 0.5s ease;
 }
 
+/* КОНТЕЙНЕР РЕЗУЛЬТАТОВ */
 .resultsContainer {
   max-width: 800px;
   margin: 0 auto;
@@ -130,6 +139,7 @@
   font-size: 1.1rem;
 }
 
+/* СЕКЦИЯ С РЕЗУЛЬТАТАМИ */
 .scoreSection {
   display: flex;
   flex-direction: column;
@@ -143,6 +153,7 @@
   position: relative;
 }
 
+/* КРУГ С РЕЗУЛЬТАТОМ */
 .scoreCircle {
   position: relative;
   width: 180px;
@@ -211,6 +222,7 @@
   font-weight: 700;
 }
 
+/* СЕКЦИЯ РАЗБОРА ВОПРОСОВ */
 .explanationsSection {
   margin-bottom: 3rem;
 }
@@ -229,6 +241,7 @@
   gap: 1.5rem;
 }
 
+/* КАРТОЧКА ВОПРОСА */
 .questionReview {
   padding: 1.5rem;
   background: var(--light-bg);
@@ -298,6 +311,7 @@
   font-style: italic;
 }
 
+/* КНОПКИ ДЕЙСТВИЙ */
 .actions {
   display: flex;
   gap: 1rem;
@@ -349,6 +363,7 @@
   box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
 }
 
+/* МЕДИА-ЗАПРОС ДЛЯ ПЛАНШЕТОВ */
 @media (max-width: 768px) {
   .container {
     padding: 0.5rem;
@@ -392,5 +407,16 @@
   .homeButton {
     width: 100%;
     min-width: auto;
+  }
+}
+
+/* МЕДИА-ЗАПРОС ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .menuCard {
+    border-width: 2px;
   }
 }

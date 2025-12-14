@@ -1,0 +1,43 @@
+/* app/sources/sources.module.css */
+/* Стили для страницы с литературой и источниками */
+
+/* ОСНОВНОЙ КОНТЕЙНЕР */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+  padding: 2rem;
+}
+
+/* ЗАГОЛОВОЧНАЯ СЕКЦИЯ */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+}
+
+/* СЕТКА ИСТОЧНИКОВ */
+.sourcesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* КАРТОЧКА КАТЕГОРИИ */
+.categoryCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  border-top: 6px solid var(--primary-blue);
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+}

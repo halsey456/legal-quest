@@ -1,7 +1,12 @@
+/* app/components/Building.module.css */
+/* Стили для компонента здания на карте */
+
 .building {
   position: absolute;
-  width: 110px;
-  min-height: 110px;
+  width: 9vw;
+  min-height: 9vw;
+  max-width: 120px;
+  max-height: 120px;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -17,6 +22,7 @@
   backdrop-filter: blur(5px);
 }
 
+/* Эффект свечения */
 .building::after {
   content: '';
   position: absolute;
@@ -35,6 +41,7 @@
   pointer-events: none;
 }
 
+/* Верхняя полоска */
 .building::before {
   content: '';
   position: absolute;
@@ -59,6 +66,7 @@
   background-color: rgba(255, 255, 255, 0.25);
 }
 
+/* Анимация пульсации при наведении */
 .building.hovered {
   animation: pulse 2s infinite;
 }
@@ -78,6 +86,7 @@
   }
 }
 
+/* Контент здания */
 .buildingContent {
   padding: 0.8rem 0.5rem;
   height: 100%;
@@ -89,17 +98,21 @@
   z-index: 1;
 }
 
+/* Иконка здания */
 .icon {
-  font-size: 2rem;
+  font-size: 2vw;
   margin-bottom: 0.3rem;
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
   transition: transform 0.3s ease;
+  max-font-size: 28px;
+  min-font-size: 16px;
 }
 
 .building:hover .icon {
   transform: scale(1.1) rotate(5deg);
 }
 
+/* Информация о блоке */
 .buildingInfo {
   text-align: center;
   width: 100%;
@@ -108,26 +121,30 @@
 
 .blockNumber {
   display: block;
-  font-size: 0.9rem;
+  font-size: 1vw;
   font-weight: 800;
   color: white;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   line-height: 1.2;
   margin-bottom: 0.2rem;
   word-wrap: break-word;
+  max-font-size: 14px;
+  min-font-size: 10px;
 }
 
 .blockTitle {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.8vw;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.95);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   line-height: 1.1;
   word-wrap: break-word;
+  max-font-size: 12px;
+  min-font-size: 8px;
 }
 
-/* Тултип */
+/* Всплывающая подсказка */
 .tooltip {
   position: absolute;
   bottom: calc(100% + 12px);
@@ -172,80 +189,148 @@
   }
 }
 
-/* МОБИЛЬНЫЕ УСТРОЙСТВА - УМЕНЬШАЕМ БЛОКИ */
-@media (max-width: 768px) {
+/* Адаптивные стили для разных размеров экрана */
+@media (max-width: 1200px) {
   .building {
-    width: 70px !important; /* Уменьшаем ширину */
-    min-height: 70px !important; /* Уменьшаем высоту */
-    border-width: 1.5px !important;
-    backdrop-filter: blur(3px) !important;
+    width: 10vw;
+    min-height: 10vw;
   }
   
   .icon {
-    font-size: 1.4rem !important; /* Уменьшаем иконку */
-    margin-bottom: 0.15rem !important;
+    font-size: 2.2vw;
   }
   
   .blockNumber {
-    font-size: 0.7rem !important; /* Уменьшаем номер блока */
-    font-weight: 700 !important;
-    line-height: 1 !important;
-    margin-bottom: 0.1rem !important;
+    font-size: 1.1vw;
   }
   
   .blockTitle {
-    font-size: 0.55rem !important; /* Уменьшаем название */
-    line-height: 1 !important;
-    font-weight: 500 !important;
+    font-size: 0.9vw;
+  }
+}
+
+@media (max-width: 992px) {
+  .building {
+    width: 11vw;
+    min-height: 11vw;
+  }
+  
+  .icon {
+    font-size: 2.4vw;
+  }
+  
+  .blockNumber {
+    font-size: 1.2vw;
+  }
+  
+  .blockTitle {
+    font-size: 1vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .building {
+    width: 13vw;
+    min-height: 13vw;
+    border-width: 1.5px;
+    backdrop-filter: blur(3px);
+  }
+  
+  .icon {
+    font-size: 2.8vw;
+    margin-bottom: 0.15rem;
+  }
+  
+  .blockNumber {
+    font-size: 1.4vw;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.1rem;
+  }
+  
+  .blockTitle {
+    font-size: 1.2vw;
+    line-height: 1;
+    font-weight: 500;
   }
   
   .buildingContent {
-    padding: 0.5rem 0.3rem !important; /* Уменьшаем отступы внутри */
+    padding: 0.5rem 0.3rem;
   }
   
   .tooltip {
-    font-size: 0.7rem !important;
-    padding: 0.4rem 0.6rem !important;
-    white-space: normal !important;
-    max-width: 100px !important;
-    text-align: center !important;
+    font-size: 0.7rem;
+    padding: 0.4rem 0.6rem;
+    white-space: normal;
+    max-width: 100px;
+    text-align: center;
   }
 }
 
-/* ОЧЕНЬ МАЛЕНЬКИЕ ТЕЛЕФОНЫ */
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .building {
-    width: 60px !important; /* Еще меньше */
-    min-height: 60px !important;
+    width: 15vw;
+    min-height: 15vw;
   }
   
   .icon {
-    font-size: 1.2rem !important;
-    margin-bottom: 0.1rem !important;
+    font-size: 3.2vw;
   }
   
   .blockNumber {
-    font-size: 0.65rem !important;
-    margin-bottom: 0.05rem !important;
+    font-size: 1.6vw;
   }
   
   .blockTitle {
-    font-size: 0.5rem !important;
-  }
-  
-  .buildingContent {
-    padding: 0.4rem 0.2rem !important;
+    font-size: 1.4vw;
   }
 }
 
-/* ГОРИЗОНТАЛЬНАЯ ОРИЕНТАЦИЯ НА ТЕЛЕФОНАХ */
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 480px) {
   .building {
-    width: 65px !important;
-    min-height: 65px !important;
+    width: 17vw;
+    min-height: 17vw;
+  }
+  
+  .icon {
+    font-size: 3.6vw;
+    margin-bottom: 0.1rem;
+  }
+  
+  .blockNumber {
+    font-size: 1.8vw;
+    margin-bottom: 0.05rem;
   }
   
   .blockTitle {
-    font-size: 0.5rem !important;
+    font-size: 1.6vw;
+  }
+  
+  .buildingContent {
+    padding: 0.4rem 0.2rem;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 360px) {
+  .building {
+    width: 20vw;
+    min-height: 20vw;
+  }
+  
+  .icon {
+    font-size: 4vw;
+  }
+  
+  .blockNumber {
+    font-size: 2vw;
+  }
+  
+  .blockTitle {
+    font-size: 1.8vw;
+  }
+  
+  .tooltip {
+    display: none;
   }
 }

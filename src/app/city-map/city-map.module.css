@@ -1,0 +1,75 @@
+/* app/city-map/city-map.module.css */
+/* Стили для страницы интерактивной карты города */
+
+/* ОСНОВНОЙ КОНТЕЙНЕР (ФИКСИРОВАННЫЙ) */
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* КОНТЕЙНЕР ДЛЯ КАРТЫ */
+.cityMapContainer {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+/* КАРТА ГОРОДА */
+.cityMapLarge {
+  width: 85%;
+  height: 85vh;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 5px rgba(44, 82, 130, 0.1);
+  border: 8px solid #2c5282;
+  background-image: url('/images/city-map.png');
+  background-size: 75% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 768px) {
+  .cityMapContainer {
+    top: 3%;
+  }
+  
+  .cityMapLarge {
+    width: 92%;
+    height: 80vh;
+    background-size: 85% auto;
+    border-width: 6px;
+    border-radius: 12px;
+  }
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ МАЛЕНЬКИХ ЭКРАНОВ */
+@media (max-width: 480px) {
+  .cityMapContainer {
+    top: 2%;
+  }
+  
+  .cityMapLarge {
+    width: 96%;
+    height: 75vh;
+    background-size: 90% auto;
+    border-width: 4px;
+    border-radius: 10px;
+  }
+}

@@ -1,3 +1,6 @@
+// app/components/TestCard.tsx
+// Карточка с вопросом теста и вариантами ответов
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -29,15 +32,15 @@ export default function TestCard({ question, onAnswer, questionNumber, totalQues
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Сбрасываем состояние при смене вопроса
+  // Сброс состояния при смене вопроса
   useEffect(() => {
     setSelectedAnswer(null);
     setIsSubmitted(false);
-  }, [question.id]); // Сбрасываем при изменении id вопроса
+  }, [question.id]);
 
   const handleAnswerClick = (index: number) => {
     setSelectedAnswer(index);
-    setIsSubmitted(false); // Сбрасываем состояние отправки при смене ответа
+    setIsSubmitted(false);
   };
 
   const handleSubmitAnswer = () => {
@@ -49,6 +52,7 @@ export default function TestCard({ question, onAnswer, questionNumber, totalQues
 
   return (
     <div className={styles.container}>
+      {/* Заголовок с номером вопроса */}
       <div className={styles.questionSection}>
         <div className={styles.questionNumber}>
           Вопрос {questionNumber} из {totalQuestions}
@@ -56,6 +60,7 @@ export default function TestCard({ question, onAnswer, questionNumber, totalQues
         <h2 className={styles.questionText}>{question.question}</h2>
       </div>
       
+      {/* Сетка вариантов ответов */}
       <div className={styles.answersGrid}>
         {question.answers.map((answer, index) => (
           <button
@@ -73,6 +78,7 @@ export default function TestCard({ question, onAnswer, questionNumber, totalQues
         ))}
       </div>
       
+      {/* Кнопки действий */}
       <div className={styles.buttonContainer}>
         {selectedAnswer !== null && !isSubmitted ? (
           <button 
